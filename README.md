@@ -31,3 +31,10 @@
   - _NB:_ the `$(pwd)` command gives you the current working directory. In this instance its the folder you've cd into.
   - To share volumes between two docker containers, use the `--volume-from` flag for instance `sudo docker run --name divine-copy --volumes-from divine -d -p 3000:80 nginx:latest`
 <br />
+
+## Creating a DOCKER file
+
+_Create a cutom docker image -_
+An image should contain all the things your application needs to run
+
+- To create a container in docker use the `docker build` commad. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
