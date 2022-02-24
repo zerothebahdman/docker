@@ -49,7 +49,7 @@ _Create a cutom docker image A image should contain all the things your applicat
   - ```CMD``` => There can only be one ```CMD``` instruction in a ```Dockerfile```. If you list more than one ```CMD``` then only the last ```CMD``` will take effect. The main purpose of a ```CMD``` is to provide defaults for an executing container. These defaults can include an executable, or they can omit the executable, in which case you must specify an ```ENTRYPOINT``` instruction as well. For instance you can run a nodejs application using the `RUN` instruction i.e `node app.js`.
   
   <br />
-- To create a container in docker use the `docker build` commad. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
+- To create a container in docker use the `docker build` commad. For instance `docker build -t divine-website:latest .` this will build a docker image from our dockerfile thats inside the our project directory. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
 
 ## Tags, Versioning ang Tagging
 
