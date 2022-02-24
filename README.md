@@ -1,5 +1,10 @@
 # Essential Docker Commands
 
+- To pull a docker image use the `pull` flag i.e `docker pull {image name}:latest`
+  - _Note:_ Always use the alpine  version of the docker image cause its light weight and faster to pull. So always check for the alpine version of images and pull them.
+
+  <br>
+- To show the list of all docker images `docker images ls`
 - To show all running docker containers use `docker ps` || `docker container ls`.
   - `docker ps` shows a list of the running containers.
     - To nicely format the output of output of docker ps use the `-format="ID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"` flag.
@@ -19,6 +24,7 @@
 
 - To stop a docker container use `docker stop {the container id}` || `docker stop {container name}`
 - To delete a container use `docker rm {the container id}`
+- To delete a docker image `docker image rm {the image id}`
 - To remove all containers from registry use `docker rm $(docker ps -aq)`
 
   - _Note:_ To forcefully remove a running container use `-f` flag i.e `docker rm -f {docker ps -aq}`.
@@ -34,8 +40,7 @@
 
 ## Creating a DOCKER file
 
-_Create a cutom docker image -_
-A image should contain all the things your application needs to run
+_Create a cutom docker image A image should contain all the things your application needs to run_
 
 - First create a docker file ```touch Dockerfile``` inside the project you want to dockerize then. Inside this file specify
   - `FROM` => The ```FROM``` instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile must start with a ```FROM``` instruction. The image can be any valid image – it is especially easy to start by pulling an image from the Public Repositories. for instance use the nodejs offical docker image `node:latest`
@@ -45,3 +50,13 @@ A image should contain all the things your application needs to run
   
   <br />
 - To create a container in docker use the `docker build` commad. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
+
+## Tags, Versioning ang Tagging
+
+### Tags =>
+
+- To create a tag use the `tag` flag like so `docker tag {from latest version of the docker image} { to version 1.0 of the docker image}` eg `sudo docker tag divine-website:latest divine-website:1.1`
+
+### Versioning =>
+
+- To create a version for a container you need the specify the version when running the container like `docker run --name {name you want to call the container} -d -p 5000:80 {the docker image}:{the version}`. For instance I want to create a new container from an image I have already created, I will run `docker run --name divine-website-v1 -d -p 5000:80 divine-website:1.1`. _NB: `1.1` in this instance is the a tag for this docker image which specifies the version_
