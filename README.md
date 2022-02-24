@@ -35,6 +35,13 @@
 ## Creating a DOCKER file
 
 _Create a cutom docker image -_
-An image should contain all the things your application needs to run
+A image should contain all the things your application needs to run
 
+- First create a docker file ```touch Dockerfile``` inside the project you want to dockerize then. Inside this file specify
+  - `FROM` => The ```FROM``` instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile must start with a ```FROM``` instruction. The image can be any valid image – it is especially easy to start by pulling an image from the Public Repositories. for instance use the nodejs offical docker image `node:latest`
+  - ```ADD``` => The ADD instruction copies new files, directories or remote file URLs from ```<src>``` and adds them to the filesystem of the image at the path. For instance to add all files || folders in the root directory use double dots ```. .```
+  - ```RUN``` => The ```RUN``` instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting committed image will be used for the next step in the Dockerfile. For instance you can instal npm all packages inside the container using the ```RUN``` instruction i.e ```npm install```
+  - ```CMD``` => There can only be one ```CMD``` instruction in a ```Dockerfile```. If you list more than one ```CMD``` then only the last ```CMD``` will take effect. The main purpose of a ```CMD``` is to provide defaults for an executing container. These defaults can include an executable, or they can omit the executable, in which case you must specify an ```ENTRYPOINT``` instruction as well. For instance you can run a nodejs application using the `RUN` instruction i.e `node app.js`.
+  
+  <br />
 - To create a container in docker use the `docker build` commad. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
