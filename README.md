@@ -1,39 +1,45 @@
 # Essential Docker Commands
 
-- To pull a docker image use the `pull` flag i.e `docker pull {image name}:latest`
+- `PULL` - To pull a docker image use the `pull` flag i.e `docker pull {image name}:latest`
   - _Note:_ Always use the alpine  version of the docker image cause its light weight and faster to pull. So always check for the alpine version of images and pull them.
 
   <br>
-- To show the list of all docker images `docker images ls`
-- To show all running docker containers use `docker ps` || `docker container ls`.
+- `SHOW DOCKER IMAGES` - To show the list of all docker images `docker images ls`
+- `SHOW RUNNING CONTAINER` - To show all running docker containers use `docker ps` || `docker container ls`.
   - `docker ps` shows a list of the running containers.
     - To nicely format the output of output of docker ps use the `-format="ID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"` flag.
     - To shorten this store the value in a variable using this command `export FORMAT="ID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"`. Now you can use `docker ps --format=$FORMAT` to show the nicely formatted output.
   
 <br />
 
-- To run a docker container use `docker run {name of the docker image}:{the version of the docker image}` || `docker run -d {name of the docker image}:{version of the docker image}`
+- `RUN CONTAINER` - To run a docker container use `docker run {name of the docker image}:{the version of the docker image}` || `docker run -d {name of the docker image}:{version of the docker image}`
   - Most time we run the `latest` version of the docker image.
   - `-d` flag means you are specify that this container should be detached and run in the background.  
 
   <br />
-- To specify a port to attach a container to use the `-p` and then specifing the port flag when running the container `docker run -d -p 8000:80 {name of the docker image}:{version of the docker image}`
+- `PORT` - To specify a port to attach a container to use the `-p` and then specifing the port flag when running the container `docker run -d -p 8000:80 {name of the docker image}:{version of the docker image}`
   - _Note:_ You can specify more than one port to attach to a container you want to run `docker run -d -p 8000:80 -p 3000:80 {name of the docker image}:{version of the docker image}`.
 
 <br />
 
-- To stop a docker container use `docker stop {the container id}` || `docker stop {container name}`
-- To delete a container use `docker rm {the container id}`
-- To delete a docker image `docker image rm {the image id}`
-- To remove all containers from registry use `docker rm $(docker ps -aq)`
+- `STOP CONTAINER` - To stop a docker container use `docker stop {the container id}` || `docker stop {container name}`
+- `DELTE CONTAINER` - To delete a container use `docker rm {the container id}`
+- `INSPECT` - To inspect a container use `docker inspect {the container id}`
+- `LOGS` - To show logs of a container use `docker logs {the container id}`. Logs are essential whe you want to debug.
+  - To see all usefull commands you can use alongside logs use the `--help` flag.
+  - To continously show logs of a contianer use `-f` flag, i.e `docker logs -f {the container id}`.
+
+  <br>
+- `DELTE IMAGE` - To delete a docker image `docker image rm {the image id}` || `docker rmi {repository}:{tag}`.
+- `DELTE ALL CONTAINER REGISTRY` - To remove all containers from registry use `docker rm $(docker ps -aq)`
 
   - _Note:_ To forcefully remove a running container use `-f` flag i.e `docker rm -f {docker ps -aq}`.
 
 <br />
 
-- To name a container use the `--name` flag. i.e `docker run --name {what you want to name the container} -d -p 3000:80 {name of the docker image}:{version of the docker image}`
+- `NAME CONTAINER` - To name a container use the `--name` flag. i.e `docker run --name {what you want to name the container} -d -p 3000:80 {name of the docker image}:{version of the docker image}`
 
-- To share a volume || folder || project with a docker container running on `nginx` for intance you need to use the `-v` flag or command which stringifies volume. first cd into the project directory and run `docker run --name {name you want to call the container} -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx:latest`
+- `SHARE VOLUMES` - To share a volume || folder || project with a docker container running on `nginx` for intance you need to use the `-v` flag or command which stringifies volume. first cd into the project directory and run `docker run --name {name you want to call the container} -v $(pwd):/usr/share/nginx/html:ro -d -p 8080:80 nginx:latest`
   - _NB:_ the `$(pwd)` command gives you the current working directory. In this instance its the folder you've cd into.
   - To share volumes between two docker containers, use the `--volume-from` flag for instance `sudo docker run --name divine-copy --volumes-from divine -d -p 3000:80 nginx:latest`
 <br />
@@ -60,3 +66,9 @@ _Create a cutom docker image A image should contain all the things your applicat
 ### Versioning =>
 
 - To create a version for a container you need the specify the version when running the container like `docker run --name {name you want to call the container} -d -p 5000:80 {the docker image}:{the version}`. For instance I want to create a new container from an image I have already created, I will run `docker run --name divine-website-v1 -d -p 5000:80 divine-website:1.1`. _NB: `1.1` in this instance is the a tag for this docker image which specifies the version_
+
+## Docker Registry
+
+There are two types of registries which are, Public and Private Registry. You can push this registries to docker registry providers like Docker HUB, Quay.io, Amazon ECR.
+
+- To push a new docker image to a docker registry use the `docker push` instruction. eg `docker push codewithdiv/nodejs-api:tagname`. _NB: Before you push to a docker registry first tag the image you want to push `docker tag {repository name}  {with the name of registry you want to push to, eg - codewithdiv/nodejs-api:tagname}`_
