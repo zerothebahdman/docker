@@ -35,17 +35,17 @@
 <br />
 
 - `STOP CONTAINER` - To stop a docker container use `docker stop {the container id}` || `docker stop {container name}`
-- `DELTE CONTAINER` - To delete a container use `docker rm {the container id}`
+- `DELETE CONTAINER` - To delete a container use `docker rm {the container id}`
 - `INSPECT` - To inspect a container use `docker inspect {the container id}`
 - `LOGS` - To show logs of a container use `docker logs {the container id}`. Logs are essential whe you want to debug.
 
-  - To see all usefull commands you can use alongside logs use the `--help` flag.
-  - To continously show logs of a contianer use `-f` flag, i.e `docker logs -f {the container id}`.
+  - To see all useful commands you can use alongside logs use the `--help` flag.
+  - To continuously show logs of a container use `-f` flag, i.e `docker logs -f {the container id}`.
 
   <br>
 
-- `DELTE IMAGE` - To delete a docker image `docker image rm {the image id}` || `docker rmi {repository}:{tag}`.
-- `DELTE ALL CONTAINER REGISTRY` - To remove all containers from registry use `docker rm $(docker ps -aq)`
+- `DELETE IMAGE` - To delete a docker image `docker image rm {the image id}` || `docker rmi {repository}:{tag}`.
+- `DELETE ALL CONTAINER REGISTRY` - To remove all containers from registry use `docker rm $(docker ps -aq)`
 
   - _Note:_ To forcefully remove a running container use `-f` flag i.e `docker rm -f {docker ps -aq}`.
 
@@ -64,14 +64,14 @@ _Create a cutom docker image A image should contain all the things your applicat
 
 - First create a docker file `touch Dockerfile` inside the project you want to dockerize then. Inside this file specify
 
-  - `FROM` => The `FROM` instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile must start with a `FROM` instruction. The image can be any valid image – it is especially easy to start by pulling an image from the Public Repositories. for instance use the nodejs offical docker image `node:latest`
+  - `FROM` => The `FROM` instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile must start with a `FROM` instruction. The image can be any valid image – it is especially easy to start by pulling an image from the Public Repositories. for instance use the nodejs official docker image `node:latest`
   - `ADD` => The ADD instruction copies new files, directories or remote file URLs from `<src>` and adds them to the filesystem of the image at the path. For instance to add all files || folders in the root directory use double dots `. .`
   - `RUN` => The `RUN` instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting committed image will be used for the next step in the Dockerfile. For instance you can instal npm all packages inside the container using the `RUN` instruction i.e `npm install`
   - `CMD` => There can only be one `CMD` instruction in a `Dockerfile`. If you list more than one `CMD` then only the last `CMD` will take effect. The main purpose of a `CMD` is to provide defaults for an executing container. These defaults can include an executable, or they can omit the executable, in which case you must specify an `ENTRYPOINT` instruction as well. For instance you can run a nodejs application using the `RUN` instruction i.e `node app.js`.
 
   <br />
 
-- To create a container in docker use the `docker build` commad. For instance `docker build -t divine-website:latest .` this will build a docker image from our dockerfile thats inside the our project directory. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
+- To create a container in docker use the `docker build` command. For instance `docker build -t divine-website:latest .` this will build a docker image from our dockerfile thats inside the our project directory. To see all available docker build command use `docker build --help`. _NB: always use `-t` or `--tag` flag to add a tag to a container_
 
 ## Tags, Versioning ang Tagging
 
